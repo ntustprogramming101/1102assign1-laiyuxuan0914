@@ -6,11 +6,12 @@ PImage soldier;
 PImage robot;
 int soliderX,soliderY;
 int  robotX,robotY;
-int  laserStart,move,laserY;
+int  laserStart,move,laserY,moveRight;
 
-void setup() {
-	size(640, 480, P2D);
-	  bg=loadImage("img/bg.jpg");
+void setup(){
+  
+  size(640,480);
+  bg=loadImage("img/bg.jpg");
   groundhog=loadImage("img/groundhog.png");
   life=loadImage("img/life.png");
   soil=loadImage("img/soil.png");
@@ -38,8 +39,9 @@ void setup() {
   laserY= robotY*80+37;
 }
 
-void draw() {
-	 image(groundhog,280,80);
+void draw(){
+  
+  image(groundhog,280,80);
   image(soil,0,160);
     
   //sun
@@ -52,7 +54,7 @@ void draw() {
   soliderX++;
   soliderX%=640;
 
-  image(soldier,soliderX,80*soliderY);
+  image(soldier,soliderX-80,80*soliderY);
   
   //robot
   image(robot,robotX*80,robotY*80);
@@ -60,7 +62,12 @@ void draw() {
   //laser
   stroke(255,0,0);
   strokeWeight(10);
-  line(laserStart+move,laserY,laserStart+40+move,laserY);
+  line(laserStart+move+40,laserY,laserStart+40+moveRight,laserY);
   move-=2;
-  move%=185;//160+25.just move 185
+  move%=185;
+  moveRight-=2;
+  moveRight%=185;//160+25.just move 185
+  if(move>-40){
+    moveRight=0;
+  }
 }
